@@ -1,0 +1,226 @@
+[
+  {
+  "id": 0,
+  "imageUrl": "https://img.megatop.by/photo/09721711/09721711_thumb_320.webp",
+  "title": "Ботинки O.LIVE naturalle",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  39,
+  40,
+  41,
+  42,
+  43
+  ],
+  "price": 150,
+  "category": 0,
+  "rating": 4
+  },
+  {
+  "id": 1,
+  "imageUrl": "https://img.megatop.by/photo/1000261/1000261_thumb_320.webp",
+  "title": "Ботинки X-Plode",
+  "types": [
+  0
+  ],
+  "sizes": [
+  40,
+  41,
+  42,
+  43,
+  44
+  ],
+  "price": 140,
+  "category": 0,
+  "rating": 6
+  },
+  {
+  "id": 2,
+  "imageUrl": "https://img.megatop.by/photo/091132512/091132512_thumb_320.webp",
+  "title": "Полуботинки Go.Do.",
+  "types": [
+  0
+  ],
+  "sizes": [
+  40,
+  41,
+  42,
+  43,
+  44
+  ],
+  "price": 86,
+  "category": 1,
+  "rating": 4
+  },
+  {
+  "id": 3,
+  "imageUrl": "https://img.megatop.by/photo/09720770/09720770_thumb_320.webp",
+  "title": "Полуботинки O.LIVE",
+  "types": [
+  1
+  ],
+  "sizes": [
+  39,
+  40,
+  41,
+  42,
+  43
+  ],
+  "price": 130,
+  "category": 1,
+  "rating": 5
+  },
+  {
+  "id": 4,
+  "imageUrl": "https://img.megatop.by/photo/100006/100006_1_thumb_320.webp",
+  "title": "Кеды O.LIVE naturalle",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  39,
+  40,
+  41,
+  43,
+  45
+  ],
+  "price": 140,
+  "category": 2,
+  "rating": 8
+  },
+  {
+  "id": 5,
+  "imageUrl": "https://img.megatop.by/photo/058301463/058301463_thumb_320.webp",
+  "title": "Кеды X-Plode",
+  "types": [
+  0
+  ],
+  "sizes": [
+  40,
+  41,
+  42,
+  43,
+  44
+  ],
+  "price": 150,
+  "category": 2,
+  "rating": 7
+  },
+  {
+  "id": 6,
+  "imageUrl": "https://img.megatop.by/photo/0583116731/0583116731_1_thumb_320.webp",
+  "title": "Кроссовки X-Plode",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  38,
+  39,
+  40,
+  41,
+  42
+  ],
+  "price": 120,
+  "category": 3,
+  "rating": 9
+  },
+  {
+  "id": 7,
+  "imageUrl": "https://img.megatop.by/photo/1303180711/1303180711_thumb_320.webp",
+  "title": "Кроссовки X-Plode",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  40,
+  41,
+  42,
+  43,
+  44
+  ],
+  "price": 150,
+  "category": 3,
+  "rating": 10
+  },
+  {
+  "id": 8,
+  "imageUrl": "https://img.megatop.by/photo/078518035/078518035_thumb_320.webp",
+  "title": "Сланцы O.LIVE naturalle",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  39,
+  40,
+  41,
+  42,
+  45
+  ],
+  "price": 86,
+  "category": 4,
+  "rating": 10
+  },
+  {
+  "id": 9,
+  "imageUrl": "https://img.megatop.by/photo/097265511/097265511_thumb_320.webp",
+  "title": "Лоферы O.LIVE naturalle",
+  "types": [
+  0,
+  1
+  ],
+  "sizes": [
+  40,
+  41,
+  42,
+  43,
+  44
+  ],
+  "price": 120,
+  "category": 5,
+  "rating": 9
+  },
+  {
+    "id": 10,
+    "imageUrl": "https://img.megatop.by/photo/09722207/09722207_thumb_320.webp",
+    "title": "Лоферы Go.Do.",
+    "types": [
+    0,
+    1
+    ],
+    "sizes": [
+    41,
+    42,
+    43,
+    44,
+    45
+    ],
+    "price": 100,
+    "category": 5,
+    "rating": 7
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://img.megatop.by/photo/09722114/09722114_thumb_320.webp",
+      "title": "Лоферы Go.Do.",
+      "types": [
+      0,
+      1
+      ],
+      "sizes": [
+      39,
+      40,
+      41,
+      42,
+      43
+      ],
+      "price": 80,
+      "category": 5,
+      "rating": 8
+      }
+  ]
