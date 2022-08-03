@@ -14,7 +14,7 @@
 
   &,
   span {
-    color: #00FF7F;
+    color: #fff;
   }
 
   i,
@@ -54,7 +54,7 @@
   }
 
   &--outline {
-    background-color: #00FF7F;
+    background-color: #fff;
     border-color: $orange;
     &,
     span {
@@ -72,7 +72,7 @@
 
       &,
       span {
-        color: #00FF7F;
+        color: #fff;
       }
 
       svg {
@@ -83,14 +83,14 @@
     }
 
     &:active {
-      background-color: darken($orange, 8%);
+      background-color: #8B4513;
     }
   }
 
   &__delimiter {
     width: 1px;
     height: 25px;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: #FFFFFF;
     margin-left: 14px;
     margin-right: 14px;
   }
@@ -107,7 +107,7 @@
 
     &:hover {
       i {
-        background-color: #00FF7F;
+        background-color: #fff;
         color: $orange;
       }
     }
@@ -116,7 +116,7 @@
       display: inline-block;
       border-radius: 30px;
       background-color: $orange;
-      color: #00FF7F;
+      color: #FFFFFF;
       font-weight: 600;
       width: 22px;
       height: 22px;
