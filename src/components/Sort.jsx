@@ -1,14 +1,21 @@
 import React from 'react'
 
-const Sort = () => {
-  const [activeSort, setActiveSort] = React.useState(0);
+const Sort = ({onClickSort, activeSort}) => {
+
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const popup = ['популярности', 'цене', 'алфавиту']
-  const sorted = popup[activeSort];
+  const popup = [
+    {name: 'популярности (DESC)', sortProperty: 'rating'},
+    {name: 'популярности (ASC)', sortProperty: '-rating'},//"-" нужен для того чтобы понять desc or asc
+    {name: 'цене (DESC)', sortProperty: 'price'},
+    {name: 'цене (ASC)', sortProperty: '-price'},
+    {name: 'алфавиту (DESC)', sortProperty: 'title'},//для того чтобы можно было вшить в запрос параметр сортировки
+    {name: 'алфавиту (ASC)', sortProperty: '-title'}
+  ]
+
 
   const onClickSorted = (index) =>{
-    setActiveSort(index);
+    onClickSort(index);
     setIsOpen(false);
   }
   return (
@@ -27,16 +34,19 @@ const Sort = () => {
                   />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=>setIsOpen(!isOpen)}>{sorted}</span>
+                <span onClick={()=>setIsOpen(!isOpen)}>{activeSort.name}</span>
               </div>
               { isOpen && <div className="sort__popup">{/* выпадашка сортировки */}
                 <ul>
                   {
                     popup.map((sort, index)=>
-                      <li key={sort} onClick={()=>onClickSorted(index)}
-                          className={activeSort === index ? 'active' : ''}>
-                            {sort}
-                      </li>)
+                        (
+                            <li key={index}
+                                onClick={()=>onClickSorted(sort)}
+                                className={activeSort.sortProperty === sort.sortProperty ? 'active' : ''}>
+                              {sort.name}
+                            </li>)
+                        )
                   }                  
                   
                 </ul>
