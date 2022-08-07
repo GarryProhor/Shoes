@@ -21,8 +21,9 @@ const Home = ({searchValue}) => {
         const order = activeSort.sortProperty.includes('-') ? 'asc' : 'desc'//при наличии "-" выбираем тип сортировки
         const sortBy = activeSort.sortProperty.replace('-','')//удаляем "-" из запроса
         const cat = activeCategories > 0 ? `category=${activeCategories}` : ``//выбираеи категорию
+        const search = searchValue ? `&search=${searchValue}` : ``
 
-        fetch(`https://62da700d9eedb699636e2d90.mockapi.io/shoes?page=${currentPage}&limit=4&${cat}&sortBy=${sortBy}&order=${order}`)
+        fetch(`https://62da700d9eedb699636e2d90.mockapi.io/shoes?page=${currentPage}&limit=4&${cat}&sortBy=${sortBy}&order=${order}${search}`)
             .then(response => response.json())
             .then(shoe=>
             {
@@ -30,19 +31,11 @@ const Home = ({searchValue}) => {
                 setIsLoading(false);
             })
         window.scroll(0,0);
-    },[activeCategories, activeSort, currentPage]);
+    },[activeCategories, activeSort, currentPage, searchValue]);
 
 
     const skeleton = [...new Array(6)].map((_, index)=><Skeleton key={index}/>)
-    const shoeses = shoes
-        .filter((obj)=>{
-                if(obj.title.toLowerCase().includes(searchValue.toLowerCase()))
-                {
-                    return true;
-                }
-            }
-        )
-        .map(shoe => <ShoeBlock key={shoe.id} {...shoe}/>)//вместо написания всех полей(спреад оператор)
+    const shoeses = shoes.map(shoe => <ShoeBlock key={shoe.id} {...shoe}/>)//вместо написания всех полей(спреад оператор)
     return (
         <>
             <div className="content__top">
