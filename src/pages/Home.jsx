@@ -4,7 +4,7 @@ import Sort from "../components/Sort";
 import Skeleton from "../components/ShoeBlock/Skeleton";
 import ShoeBlock from "../components/ShoeBlock";
 
-const Home = () => {
+const Home = ({searchValue}) => {
     const [shoes, setShoes] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [activeCategories, setActiveCategories] = React.useState(0);
@@ -27,10 +27,20 @@ const Home = () => {
                 setShoes(shoe);
                 setIsLoading(false);
             })
+        window.scroll(0,0);
     },[activeCategories, activeSort]);
 
 
-
+    const skeleton = [...new Array(6)].map((_, index)=><Skeleton key={index}/>)
+    const shoeses = shoes
+        .filter((obj)=>{
+                if(obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+                {
+                    return true;
+                }
+            }
+        )
+        .map(shoe => <ShoeBlock key={shoe.id} {...shoe}/>)//вместо написания всех полей(спреад оператор)
     return (
         <>
             <div className="content__top">
@@ -39,10 +49,7 @@ const Home = () => {
             </div>
             <h2 className="content__title">Вся обувь</h2>
             <div className="content__items">
-                {isLoading ? [...new Array(6)].map((_, index)=><Skeleton key={index}/>) :
-                    shoes.map(shoe => <ShoeBlock key={shoe.id} {...shoe}/>)//вместо написания всех полей(спреад оператор)
-
-                }
+                {isLoading ? skeleton : shoeses}
             </div>
         </>
     )
