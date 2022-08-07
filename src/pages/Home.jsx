@@ -5,7 +5,10 @@ import Skeleton from "../components/ShoeBlock/Skeleton";
 import ShoeBlock from "../components/ShoeBlock";
 import Pagination from "../components/Pagination";
 
-const Home = ({searchValue}) => {
+import {SearchContext} from "../App";
+
+const Home = () => {
+    const {searchValue} = React.useContext(SearchContext)
     const [shoes, setShoes] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [activeCategories, setActiveCategories] = React.useState(0);
