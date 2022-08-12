@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     category: 0,
     currentPage: 1,
+    searchValue: '',
     sort: {
         name: 'популярности',
         sortProperty: 'rating'
@@ -23,7 +24,7 @@ const filterSlice = createSlice({
             state.currentPage =  action.payload;
         },
         setSearch(state, action){
-            state.currentPage =  action.payload;
+            state.searchValue =  action.payload;
         },
     }
 });

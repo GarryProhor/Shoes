@@ -8,13 +8,21 @@ import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
+import {setSearch} from './redux/slices/filterSlice'
+import {useSelector, useDispatch} from "react-redux";
 
 // import shoes from './assets/shoes.json';
 
 export const SearchContext = React.createContext();
 
 function App() {
-    const [searchValue, setSearchValue] = React.useState('');
+    const searchValue = useSelector((state) => state.filter.searchValue);
+    const dispatch = useDispatch();
+
+    const setSearchValue = (str) =>{
+        dispatch(setSearch(str))
+        console.log(dispatch(setSearch(str)))
+    }
 
     return (
         <div className="wrapper">
