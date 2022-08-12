@@ -7,19 +7,30 @@ import ShoeBlock from "../components/ShoeBlock";
 import Pagination from "../components/Pagination";
 
 import {SearchContext} from "../App";
-import {selectCategory, selectSortProperty, setCategoryId} from "../redux/slices/filterSlice";
+import {
+    selectCategory,
+    selectCurrentPage,
+    selectSortProperty,
+    setCategoryId,
+    setCurrentPage
+} from "../redux/slices/filterSlice";
 
 const Home = () => {
     const dispatch = useDispatch();
     const category = useSelector(selectCategory);
     const sort = useSelector(selectSortProperty);
+    const currentPage = useSelector(selectCurrentPage)
     const {searchValue} = React.useContext(SearchContext)
     const [shoes, setShoes] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [currentPage, setCurrentPage] = React.useState(1);
+
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
+    }
+
+    const onChangePages = (page) =>{
+        dispatch(setCurrentPage(page));
     }
 
     React.useEffect(()=>{
@@ -53,7 +64,7 @@ const Home = () => {
             <div className="content__items">
                 {isLoading ? skeleton : shoeses}
             </div>
-            <Pagination currentPage={currentPage} onChangePage={(page)=>setCurrentPage(page)}/>
+            <Pagination currentPage={currentPage} onChangePage={onChangePages}/>
         </>
     )
 }
