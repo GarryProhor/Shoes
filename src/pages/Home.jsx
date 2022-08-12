@@ -14,6 +14,7 @@ import {
     setCategoryId,
     setCurrentPage
 } from "../redux/slices/filterSlice";
+import axios from "axios";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -41,13 +42,12 @@ const Home = () => {
         const cat = category > 0 ? `category=${category}` : ``//выбираеи категорию
         const search = searchValue ? `&search=${searchValue}` : ``
 
-        fetch(`https://62da700d9eedb699636e2d90.mockapi.io/shoes?page=${currentPage}&limit=4&${cat}&sortBy=${sortBy}&order=${order}${search}`)
-            .then(response => response.json())
-            .then(shoe=>
-            {
-                setShoes(shoe);
+        axios.get(`https://62da700d9eedb699636e2d90.mockapi.io/shoes?page=${currentPage}&limit=4&${cat}&sortBy=${sortBy}&order=${order}${search}`)
+            .then((response) =>{
+                setShoes(response.data);
                 setIsLoading(false);
             })
+
         window.scroll(0,0);
     },[category, sort, currentPage, searchValue]);
 
