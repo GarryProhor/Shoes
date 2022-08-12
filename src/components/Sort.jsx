@@ -1,21 +1,22 @@
 import React from 'react'
+import {useSelector, useDispatch} from "react-redux";
+import {selectSort, setSort} from '../redux/slices/filterSlice'
 
-const Sort = ({onClickSort, activeSort}) => {
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const popup = [
-    {name: 'популярности (DESC)', sortProperty: 'rating'},
+const popup = [{name: 'популярности (DESC)', sortProperty: 'rating'},
     {name: 'популярности (ASC)', sortProperty: '-rating'},//"-" нужен для того чтобы понять desc or asc
     {name: 'цене (DESC)', sortProperty: 'price'},
     {name: 'цене (ASC)', sortProperty: '-price'},
     {name: 'алфавиту (DESC)', sortProperty: 'title'},//для того чтобы можно было вшить в запрос параметр сортировки
-    {name: 'алфавиту (ASC)', sortProperty: '-title'}
-  ]
+    {name: 'алфавиту (ASC)', sortProperty: '-title'}];
+
+function Sort() {
+    const dispatch = useDispatch();
+    const sort = useSelector(selectSort) ;
+    const [isOpen, setIsOpen] = React.useState(false);
 
 
-  const onClickSorted = (index) =>{
-    onClickSort(index);
+  const onClickSorted = (obj) =>{
+   dispatch(setSort(obj));
     setIsOpen(false);
   }
   return (
@@ -34,17 +35,17 @@ const Sort = ({onClickSort, activeSort}) => {
                   />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=>setIsOpen(!isOpen)}>{activeSort.name}</span>
+                <span onClick={()=>setIsOpen(!isOpen)}>{sort.name}</span>
               </div>
               { isOpen && <div className="sort__popup">{/* выпадашка сортировки */}
                 <ul>
                   {
-                    popup.map((sort, index)=>
+                    popup.map((obj, index)=>
                         (
                             <li key={index}
-                                onClick={()=>onClickSorted(sort)}
-                                className={activeSort.sortProperty === sort.sortProperty ? 'active' : ''}>
-                              {sort.name}
+                                onClick={()=>onClickSorted(obj)}
+                                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
+                              {obj.name}
                             </li>)
                         )
                   }                  

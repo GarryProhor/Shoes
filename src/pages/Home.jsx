@@ -1,4 +1,5 @@
 import React from 'react'
+import {useSelector, useDispatch} from "react-redux";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import Skeleton from "../components/ShoeBlock/Skeleton";
@@ -6,24 +7,27 @@ import ShoeBlock from "../components/ShoeBlock";
 import Pagination from "../components/Pagination";
 
 import {SearchContext} from "../App";
+import {selectCategory, selectSortProperty, setCategoryId} from "../redux/slices/filterSlice";
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const category = useSelector(selectCategory);
+    const sort = useSelector(selectSortProperty);
     const {searchValue} = React.useContext(SearchContext)
     const [shoes, setShoes] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [activeCategories, setActiveCategories] = React.useState(0);
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [activeSort, setActiveSort] = React.useState({
-        name: 'популярности',
-        sortProperty: 'rating'
-    });
+
+    const onChangeCategory = (id) => {
+        dispatch(setCategoryId(id));
+    }
 
     React.useEffect(()=>{
         setIsLoading(true) //для отображения скелетона при выборе катенгории
 
-        const order = activeSort.sortProperty.includes('-') ? 'asc' : 'desc'//при наличии "-" выбираем тип сортировки
-        const sortBy = activeSort.sortProperty.replace('-','')//удаляем "-" из запроса
-        const cat = activeCategories > 0 ? `category=${activeCategories}` : ``//выбираеи категорию
+        const order = sort.includes('-') ? 'asc' : 'desc'//при наличии "-" выбираем тип сортировки
+        const sortBy = sort.replace('-','')//удаляем "-" из запроса
+        const cat = category > 0 ? `category=${category}` : ``//выбираеи категорию
         const search = searchValue ? `&search=${searchValue}` : ``
 
         fetch(`https://62da700d9eedb699636e2d90.mockapi.io/shoes?page=${currentPage}&limit=4&${cat}&sortBy=${sortBy}&order=${order}${search}`)
@@ -34,7 +38,7 @@ const Home = () => {
                 setIsLoading(false);
             })
         window.scroll(0,0);
-    },[activeCategories, activeSort, currentPage, searchValue]);
+    },[category, sort, currentPage, searchValue]);
 
 
     const skeleton = [...new Array(6)].map((_, index)=><Skeleton key={index}/>)
@@ -42,8 +46,8 @@ const Home = () => {
     return (
         <>
             <div className="content__top">
-                <Categories activeCategories={activeCategories} onClickCategories={(id)=>setActiveCategories(id)}/>
-                <Sort activeSort={activeSort} onClickSort={(id)=>setActiveSort(id)}/>
+                <Categories value={category} onClickCategories={onChangeCategory}/>
+                <Sort />
             </div>
             <h2 className="content__title">Вся обувь</h2>
             <div className="content__items">
