@@ -2,7 +2,8 @@ import React from 'react'
 import {useSelector, useDispatch} from "react-redux";
 import {selectSort, setSort} from '../redux/slices/filterSlice'
 
-const popup = [{name: 'популярности (DESC)', sortProperty: 'rating'},
+
+export const popup = [{name: 'популярности (DESC)', sortProperty: 'rating'},
     {name: 'популярности (ASC)', sortProperty: '-rating'},//"-" нужен для того чтобы понять desc or asc
     {name: 'цене (DESC)', sortProperty: 'price'},
     {name: 'цене (ASC)', sortProperty: '-price'},

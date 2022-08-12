@@ -1,10 +1,12 @@
 import React from 'react'
 import {useSelector, useDispatch} from "react-redux";
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, {popup} from "../components/Sort";
 import Skeleton from "../components/ShoeBlock/Skeleton";
 import ShoeBlock from "../components/ShoeBlock";
 import Pagination from "../components/Pagination";
+import { useNavigate } from 'react-router-dom';
+import qs from 'qs';
 
 import {SearchContext} from "../App";
 import {
@@ -12,7 +14,8 @@ import {
     selectCurrentPage,
     selectSortProperty,
     setCategoryId,
-    setCurrentPage
+    setCurrentPage,
+    setFilters
 } from "../redux/slices/filterSlice";
 import axios from "axios";
 
@@ -25,6 +28,11 @@ const Home = () => {
     const [shoes, setShoes] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const navigate = useNavigate();
+
+    const isSearch = React.useRef(false);
+    const isMounted = React.useRef(false);
+
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
@@ -34,7 +42,7 @@ const Home = () => {
         dispatch(setCurrentPage(page));
     }
 
-    React.useEffect(()=>{
+    const fetchShoes = ()=>{
         setIsLoading(true) //для отображения скелетона при выборе катенгории
 
         const order = sort.includes('-') ? 'asc' : 'desc'//при наличии "-" выбираем тип сортировки
@@ -46,10 +54,52 @@ const Home = () => {
             .then((response) =>{
                 setShoes(response.data);
                 setIsLoading(false);
-            })
+            });
 
         window.scroll(0,0);
-    },[category, sort, currentPage, searchValue]);
+        };
+
+    // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
+    React.useEffect(() => {
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1));
+
+            const sort = popup.find((obj) => obj.sortProperty === params.sortProperty);
+
+            dispatch(
+                setFilters({
+                    ...params,
+                    sort,
+                }),
+            );
+            isSearch.current = true;
+        }
+    }, []);
+
+
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+        if(!isSearch.current){
+            fetchShoes();
+        }
+        isSearch.current=false;
+
+    }, [category, sort, searchValue, currentPage])
+
+
+    // Если изменили параметры и был первый рендер
+    React.useEffect(()=>{
+        if(isMounted.current){
+            const queryString = qs.stringify({
+                sort: sort,
+                category,
+                currentPage,
+            });
+            navigate(`?${queryString}`)
+        }
+        isMounted.current=true;
+    }, [category, sort, currentPage]);
+
 
 
     const skeleton = [...new Array(6)].map((_, index)=><Skeleton key={index}/>)
